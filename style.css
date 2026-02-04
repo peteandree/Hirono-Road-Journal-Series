@@ -1,0 +1,273 @@
+:root {
+    --bg-color: #0d0d0d;
+    --box-grey: #4a4a4a;
+    --text-color: #d1d1d1;
+    --hirono-accent: #ff4d4d;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: url("hirono cover.png"); /* BACKGROUND PLACEHOLDER */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    color: var(--text-color);
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Dark overlay for readability */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: -1;
+}
+
+.scene {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    animation: fadeIn 0.8s ease;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.header-group {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+/* --- The 3D Box --- */
+#blind-box-main {
+    cursor: pointer;
+}
+
+.hirono-box {
+    width: 200px;
+    height: 300px;
+    background: var(--box-grey);
+    border: 2px solid #222;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.6),
+        inset -5px -5px 15px rgba(0,0,0,0.4),
+        inset 5px 5px 15px rgba(255,255,255,0.05);
+    transition: transform 0.2s;
+}
+
+#blind-box-main:hover .hirono-box {
+    transform: scale(1.03) rotate(1deg);
+}
+
+.box-inner {
+    width: 85%;
+    height: 40%;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+.series-tag {
+    background: #000;
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 4px 12px;
+    margin-top: 10px;
+}
+
+/* --- The 5 Black Cards --- */
+.card-container {
+    display: flex;
+    gap: 20px;
+    perspective: 1000px;
+}
+
+.card {
+    width: 140px;
+    height: 210px;
+    position: relative;
+    opacity: 0.3;
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+    animation: popOut 0.6s cubic-bezier(0.17, 0.67, 0.83, 0.67) backwards;
+}
+
+/* Staggered appearance */
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+.card:nth-child(5) { animation-delay: 0.5s; }
+
+.card.active-turn {
+    opacity: 1;
+    filter: grayscale(0%);
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255,255,255,0.2);
+}
+
+.card.active-turn:hover {
+    transform: translateY(-15px);
+}
+
+.card.flipped {
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border: 2px solid #333;
+    border-radius: 4px;
+}
+
+.card-front {
+    background: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: #333;
+}
+
+.card-back {
+    background: #fff;
+    transform: rotateY(180deg);
+    overflow: hidden;
+}
+
+.card-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- Valentine Modal --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: #1a1a1a;
+    padding: 50px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255, 77, 77, 0.15);
+}
+
+.modal-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: #e0e0e0;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.btn {
+    padding: 12px 35px;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.btn.yes { 
+    background: var(--hirono-accent); 
+    color: white; 
+}
+
+.btn.yes:hover { 
+    transform: scale(1.1); 
+    box-shadow: 0 0 20px var(--hirono-accent); 
+}
+
+.btn.no { 
+    background: #333; 
+    color: #777; 
+    position: relative; 
+}
+
+/* Animations */
+@keyframes popOut {
+    0% {
+        transform: scale(0) translateY(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 0.3;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

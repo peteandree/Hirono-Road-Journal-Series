@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hirono Road Journal Valentine</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <div id="landing-page" class="scene">
+        <div class="header-group">
+            <h1>Hirono Road Journal Series</h1>
+            <p class="subtitle">Plush Doll Pendant Blind Box</p>
+        </div>
+        
+        <div id="blind-box-main" onclick="unboxSeries()">
+            <div class="hirono-box">
+                <div class="box-inner">
+                    <span class="brand">HIRONO</span>
+                    <div class="series-tag">ROAD JOURNAL</div>
+                </div>
+            </div>
+        </div>
+        
+        <p class="hint">Click the box to unbox the collection</p>
+    </div>
+
+    <div id="card-display" class="scene hidden">
+        <div class="header-group">
+            <h2>Your Road Journal Collection</h2>
+            <p id="status-msg">Open the cards from left to right</p>
+        </div>
+
+        <div class="card-container">
+            <div class="card" id="card1" onclick="handleCardClick(1)">
+                <div class="card-inner">
+                    <div class="card-front">?</div>
+                    <div class="card-back"><img src="into fogwild.png" alt="Hirono 1"></div>
+                </div>
+            </div>
+            <div class="card" id="card2" onclick="handleCardClick(2)">
+                <div class="card-inner">
+                    <div class="card-front">?</div>
+                    <div class="card-back"><img src="lost in the night.png" alt="Hirono 2"></div>
+                </div>
+            </div>
+            <div class="card" id="card3" onclick="handleCardClick(3)">
+                <div class="card-inner">
+                    <div class="card-front">?</div>
+                    <div class="card-back"><img src="frostfall hour.png" alt="Hirono 3"></div>
+                </div>
+            </div>
+            <div class="card" id="card4" onclick="handleCardClick(4)">
+                <div class="card-inner">
+                    <div class="card-front">?</div>
+                    <div class="card-back"><img src="woven woods.png" alt="Hirono 4"></div>
+                </div>
+            </div>
+            <div class="card" id="card5" onclick="handleCardClick(5)">
+                <div class="card-inner">
+                    <div class="card-front">?</div>
+                    <div class="card-back"><img src="grey gravel.png" alt="Surprise"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="valentine-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h1>A rare page, meant only for you.</h1>
+            <h3>Wab, Will you be my valentine?</h3>
+            <div class="modal-buttons">
+                <button class="btn yes" onclick="celebrate()">Yes!</button>
+                <button class="btn no" onmouseover="dodge(this)">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="success-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h1>❤️</h1>
+            <h3>I knew you'd say yes!</h3>
+            <div class="modal-buttons">
+                <button class="btn yes" onclick="location.reload()">Yay!</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="hirono.js"></script>
+</body>
+</html>
